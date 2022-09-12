@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>Recipe Idea Generator</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script defer type="text/javascript" src="index.js"></script>
+    <script defer type="text/javascript" defer src="index.js"></script>
 </head>
 
 <body>
@@ -29,16 +29,20 @@
             <h2 id="ingredients-header">Ingredients</h2>
             <ul id="ingredients"></ul>
         </div>
+
     </div>
 
     <!-- Ingredients -->
-    <form id="ingredients">
-        <h4>What do you have?</h4>
-        <input type="text" name="first" id="first" />
-        <input type="text" name="second" id="second" />
-        <input type="text" name="third" id="third" />
-        <input type="submit" value="Look up" />
-    </form>
+    <div id="ingredient-form">
+        <form id="ingredients">
+            <h4>What do you have?</h4>
+            <input type="text" name="first" id="first" />
+            <input type="text" name="second" id="second" />
+            <input type="text" name="third" id="third" />
+            <input type="submit" value="Look up" />
+        </form>
+    </div>
+ 
 
 </body>
 

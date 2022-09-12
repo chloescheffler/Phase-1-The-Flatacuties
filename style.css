@@ -41,27 +41,35 @@
   
   #recipe-detail {
     position: relative;
-    width: 900px;
+    width: 100%;
+    display: flex;
   }
 
   #recipe-image {
-    float: left;
-    width: 33%;
+    position: absolute;
+    width: 300px;
+    top: 0px;
+    right: 1000px;
   }
   
   #detail-image {
-    height: 300px;
     width: 300px;
-  }
+ } 
 
   #recipe-directions {
+    position: absolute;
     float: left;
-    width: 33%;
+    width: 300px;
+    right: 500px;
+    top: 0px;
   }
 
   #recipe-ingredients {
+    position: absolute;
     float: left;
-    width: 33%;
+    width: 300px;
+    right: 100px;
+    top: 0px;
   }
 
   
@@ -117,4 +125,10 @@
     margin: 0.5rem 0;
     color: white;
     background-color: black;
+  }
+
+  #ingredient-form {
+    position: relative;
+    top: 300px;
+    right: 450px;
   }
