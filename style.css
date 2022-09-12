@@ -41,12 +41,29 @@
   
   #recipe-detail {
     position: relative;
+    width: 900px;
+  }
+
+  #recipe-image {
+    float: left;
+    width: 33%;
   }
   
   #detail-image {
     height: 300px;
     width: 300px;
   }
+
+  #recipe-directions {
+    float: left;
+    width: 33%;
+  }
+
+  #recipe-ingredients {
+    float: left;
+    width: 33%;
+  }
+
   
   .name,
   .restaurant {
