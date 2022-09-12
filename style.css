@@ -43,8 +43,9 @@
     position: relative;
   }
   
-  .detail-image {
-    height: 250px;
+  #detail-image {
+    height: 300px;
+    width: 300px;
   }
   
   .name,
