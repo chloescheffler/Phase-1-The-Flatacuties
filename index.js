@@ -32,13 +32,14 @@ function loadRandom(){
     })
 }
 
-loadRandom()
-
-fetch('https://www.themealdb.com/api/json/v2/9973533/latest.php')
-.then(res => res.json())
-.then(data => data.meals.forEach((meal) => {
-    renderRecipeBar(meal)
-}))
+function loadBanner(){
+    recipeIngredients.innerHTML = ""
+    fetch('https://www.themealdb.com/api/json/v2/9973533/latest.php')
+    .then(res => res.json())
+    .then(data => data.meals.forEach((meal) => {
+        renderRecipeBar(meal)
+    }))
+}
 
 // loads image, instructions, and ingredients for a given meal into the spotlight
 function loadRecipe(meal){
@@ -63,7 +64,6 @@ function renderRecipeBar(meal) {
     const img = document.createElement('img')
     img.src = meal.strMealThumb
     recipeBanner.append(img)
-
     img.addEventListener('click', (e) => {
         // loads clicked meal into the spotlight
         getMealById(meal.idMeal)
@@ -89,8 +89,6 @@ function clearBar(){
     recipeBanner.innerHTML = ""
 }
 
-let mealToFetch = {}
-
 function getMealById(id){
     return fetch(`https://www.themealdb.com/api/json/v2/9973533/lookup.php?i=${id}`)
     .then(res => res.json())
@@ -108,8 +106,14 @@ function handleForm() {
 
         clearBar();
 
+        //if no ingredients
+        if (firstIng == "" && secondIng == ""){
+            loadBanner()
+            loadRandom()
+        }
+
         //only one ingredient
-        if (secondIng == ""){
+        else if (secondIng == ""){
             fetch(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${firstIng}`)
             .then(res => res.json())
             .then(data => {
@@ -165,4 +169,7 @@ function nothingFoundTwo(firstIng, secondIng){
     ingredientsHeader.textContent = ""
 }
 
+
+loadRandom()
+loadBanner()
 handleForm()
