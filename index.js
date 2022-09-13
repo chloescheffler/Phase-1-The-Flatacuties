@@ -27,10 +27,11 @@ function loadRandom(){
         recipeImage.src = mealImage;
         recipeName.textContent = `Here's an idea: ${mealName}`;
         recipeInstructions.textContent = instructions;
+        renderRecipeBar(recipe.meals[0])
     })
 }
 
-loadRandom();
+loadRandom()
 
 fetch('https://www.themealdb.com/api/json/v2/9973533/latest.php')
 .then(res => res.json())
@@ -105,10 +106,11 @@ function handleForm() {
 
         clearBar();
 
+        //only one ingredient
         if (secondIng == ""){
             fetch(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${firstIng}`)
             .then(res => res.json())
-            .then(data => data.meals.forEach((meal) => {
+            .then(data => {data.meals.forEach((meal) => {
                 renderRecipeBar(meal)
                 getMealById(meal.idMeal)
                 .then(meal => loadRecipe(meal))
@@ -116,6 +118,7 @@ function handleForm() {
             ))
         }
      
+        //two ingredients
         else{
             fetch(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${firstIng},${secondIng}`)
                 .then(res => res.json())
@@ -126,8 +129,6 @@ function handleForm() {
                 } 
             ))
         }
-        
-
     })
 }
 
