@@ -3,6 +3,7 @@ const recipeName = document.getElementById("directions-header");
 const recipeInstructions = document.getElementById("directions");
 const recipeIngredients = document.getElementById("ingredients");
 const recipeBanner = document.querySelector('#recipe-banner')
+const ingredientsHeader = document.querySelector('#ingredients-header')
 const API_KEY = 9973533
 
 // load random recipe at first
@@ -55,6 +56,7 @@ function loadRecipe(meal){
             recipeIngredients.append(li)
         }   
     }
+    ingredientsHeader.textContent = "Ingredients"
 }
 
 function renderRecipeBar(meal) {
@@ -110,27 +112,57 @@ function handleForm() {
         if (secondIng == ""){
             fetch(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${firstIng}`)
             .then(res => res.json())
-            .then(data => {data.meals.forEach((meal) => {
-                renderRecipeBar(meal)
-                getMealById(meal.idMeal)
-                .then(meal => loadRecipe(meal))
-            } 
-            ))
+            .then(data => {
+                //make sure meals are found
+                if (data.meals == null){
+                    nothingFoundOne(firstIng)
+                }
+                else{
+                    data.meals.forEach((meal) => {
+                        renderRecipeBar(meal)
+                        getMealById(meal.idMeal)
+                        .then(meal => loadRecipe(meal))
+                    })
+                }
+            }
+            )
         }
      
         //two ingredients
         else{
             fetch(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${firstIng},${secondIng}`)
                 .then(res => res.json())
-                .then(data => data.meals.forEach((meal) => {
-                    renderRecipeBar(meal)
-                    getMealById(meal.idMeal)
-                    .then(meal => loadRecipe(meal))
-                } 
-            ))
+                .then(data => {
+                    //make sure meals are found
+                    if (data.meals == null){
+                        nothingFoundTwo(firstIng, secondIng)
+                    }
+                    else{
+                        data.meals.forEach((meal) => {
+                            renderRecipeBar(meal)
+                            getMealById(meal.idMeal)
+                            .then(meal => loadRecipe(meal))
+                        })
+                    }
+                })
         }
     })
 }
 
+function nothingFoundOne(firstIng){
+    // recipeImage
+    recipeName.textContent = `No recipes found with ${firstIng}. Sorry.`
+    recipeInstructions.textContent = "We're not MADE of recipes over here. Look for something else in your pantry and/or fridge!"
+    recipeIngredients.innerHTML = ""
+    ingredientsHeader.textContent = ""
+}
+
+function nothingFoundTwo(firstIng, secondIng){
+    // recipeImage
+    recipeName.textContent = `No recipes found with ${firstIng} and ${secondIng}. Sorry.`
+    recipeInstructions.textContent = "We're not MADE of recipes over here. Look for something else in your pantry and/or fridge!"
+    recipeIngredients.innerHTML = ""
+    ingredientsHeader.textContent = ""
+}
 
 handleForm()
