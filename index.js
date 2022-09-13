@@ -36,7 +36,6 @@ fetch('https://www.themealdb.com/api/json/v2/9973533/latest.php')
 .then(res => res.json())
 .then(data => data.meals.forEach((meal) => {
     renderRecipeBar(meal)
-    console.log(data)
 }))
 
 // loads image, instructions, and ingredients for a given meal into the spotlight
@@ -55,6 +54,7 @@ function loadRecipe(meal){
             recipeIngredients.append(li)
         }   
     }
+    console.log(meal.strInstructions)
 }
 
 function renderRecipeBar(meal) {
@@ -86,6 +86,18 @@ function clearBar(){
     recipeBanner.innerHTML = ""
 }
 
+function getMealById(id){
+    // let mealFetched = {}
+    return fetch(`https://www.themealdb.com/api/json/v2/9973533/lookup.php?i=${id}`)
+    .then(res => res.json())
+    .then(data => 
+        data.meals[0]
+        // mealFetched = data.meals[0]
+    )
+    // return mealFetched
+}
+
+console.log(getMealById(52885).PromiseResult)
 
 function handleForm() {
     const form = document.querySelector('#ingredient-form')
@@ -100,7 +112,10 @@ function handleForm() {
             .then(res => res.json())
             .then(data => data.meals.forEach((meal) => {
                 renderRecipeBar(meal)
-                loadRecipe(meal)
+                // const mealToLoad = getMealById(52885)
+                // console.log(mealToLoad)
+                // loadRecipe(getMealById(meal.idMeal))
+                // console.log(getMealById(meal.idMeal))
             } 
         ))
         
