@@ -4,10 +4,13 @@ const recipeInstructions = document.getElementById("directions");
 const recipeIngredients = document.getElementById("ingredients");
 
 // load random recipe at first
-function loadRandom(){
     fetch("https://www.themealdb.com/api/json/v1/1/random.php")
     .then(res => res.json())
-    .then(recipe => {
+    .then(data => data.forEach((meal) => {
+        loadRandom(meal)
+    }))
+       
+    function loadRandom() {
         const mealName = recipe.meals[0].strMeal;
         const mealImage = recipe.meals[0].strMealThumb;
         const instructions = recipe.meals[0].strInstructions;
@@ -26,12 +29,22 @@ function loadRandom(){
         }
         recipeImage.src = mealImage;
         recipeName.textContent = `Here's an idea: ${mealName}`;
-        console.log(instructions)
         recipeInstructions.textContent = instructions;
-    })
-    .then(recipe => recipe.forEach((mealImage) => {
-        recipeBanner.append(mealImage)
-    }))
-}
+    // })
+    // .then(recipe => recipe.forEach((mealImage) => {
+    //     recipeBanner.append(mealImage)
+    }
 
-loadRandom();
+function handleForm() {
+    const form = document.querySelector('#ingredient-form')
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const firstIng = e.target["first"].value
+        const secondIng = e.target["second"].value
+        const thirdIng = e.target["third"].value
+
+        const newRecipe = {
+
+        }
+    })
+}
