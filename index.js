@@ -119,7 +119,7 @@ function handleForm() {
             .then(data => {
                 //make sure meals are found
                 if (data.meals == null){
-                    nothingFoundOne(firstIng)
+                    nothingFoundOne(e.target["first"].value)
                 }
                 else{
                     data.meals.forEach((meal) => {
@@ -139,7 +139,7 @@ function handleForm() {
                 .then(data => {
                     //make sure meals are found
                     if (data.meals == null){
-                        nothingFoundTwo(firstIng, secondIng)
+                        nothingFoundTwo(e.target["first"].value, e.target["second"].value)
                     }
                     else{
                         data.meals.forEach((meal) => {
