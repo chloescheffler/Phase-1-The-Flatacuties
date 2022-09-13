@@ -11,6 +11,7 @@ function loadRandom(){
         const mealName = recipe.meals[0].strMeal;
         const mealImage = recipe.meals[0].strMealThumb;
         const instructions = recipe.meals[0].strInstructions;
+        const recipeBanner = document.querySelector('#recipe-banner')
         //there are no more than 20 ingredients in each recipe
         for (let i = 0; i < 20; i++){
             let ingredientName = recipe.meals[0][`strIngredient${i+1}`]
@@ -28,6 +29,9 @@ function loadRandom(){
         console.log(instructions)
         recipeInstructions.textContent = instructions;
     })
+    .then(recipe => recipe.forEach((mealImage) => {
+        recipeBanner.append(mealImage)
+    }))
 }
 
 loadRandom();
