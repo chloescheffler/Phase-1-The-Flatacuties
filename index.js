@@ -39,26 +39,32 @@ fetch('https://www.themealdb.com/api/json/v2/9973533/latest.php')
     console.log(data)
 }))
 
+// loads image, instructions, and ingredients for a given meal into the spotlight
+function loadRecipe(meal){
+    recipeImage.src = meal.strMealThumb
+    recipeInstructions.textContent = meal.strInstructions
+    recipeName.textContent = meal.strMeal
+    recipeIngredients.innerHTML = ""
+    for (let i = 1; i < 21; i++){
+        let ingredientName = meal[`strIngredient${i}`]
+        let ingredientMeasure = meal[`strMeasure${i}`]
+        let ingredientEntry = ingredientMeasure + ' ' + ingredientName
+        const li = document.createElement("li")
+        if (ingredientName != ""){
+            li.textContent = ingredientEntry
+            recipeIngredients.append(li)
+        }   
+    }
+}
+
 function renderRecipeBar(meal) {
     const img = document.createElement('img')
     img.src = meal.strMealThumb
     recipeBanner.append(img)
 
     img.addEventListener('click', (e) => {
-        recipeImage.src = meal.strMealThumb
-        recipeInstructions.textContent = meal.strInstructions
-        recipeName.textContent = meal.strMeal
-        recipeIngredients.innerHTML = ""
-        for (let i = 1; i < 21; i++){
-            let ingredientName = meal[`strIngredient${i}`]
-            let ingredientMeasure = meal[`strMeasure${i}`]
-            let ingredientEntry = ingredientMeasure + ' ' + ingredientName
-            const li = document.createElement("li")
-            if (ingredientName != ""){
-                li.textContent = ingredientEntry
-                recipeIngredients.append(li)
-            }   
-        }
+        // loads clicked meal into the spotlight
+        loadRecipe(meal)
     })
 }
 
@@ -75,9 +81,11 @@ function textify(string){
     return newString
 }
 
+
 function clearBar(){
     recipeBanner.innerHTML = ""
 }
+
 
 function handleForm() {
     const form = document.querySelector('#ingredient-form')
@@ -89,11 +97,14 @@ function handleForm() {
         clearBar();
 
         fetch(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${firstIng},${secondIng}`)
-        .then(res => res.json())
-        .then(data => data.meals.forEach((meal) => {
-            renderRecipeBar(meal)
-        } 
+            .then(res => res.json())
+            .then(data => data.meals.forEach((meal) => {
+                renderRecipeBar(meal)
+                loadRecipe(meal)
+            } 
         ))
+        
+
     })
 }
 
