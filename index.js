@@ -19,7 +19,7 @@ function loadRandom(){
             let ingredientMeasure = recipe.meals[0][`strMeasure${i}`]
             let ingredientEntry = ingredientMeasure + ' ' + ingredientName
             const li = document.createElement("li")
-            if (ingredientName != ""){
+            if (ingredientName != "" && ingredientName != null){
                 li.textContent = ingredientEntry
                 recipeIngredients.append(li)
             }  
@@ -49,12 +49,11 @@ function loadRecipe(meal){
         let ingredientMeasure = meal[`strMeasure${i}`]
         let ingredientEntry = ingredientMeasure + ' ' + ingredientName
         const li = document.createElement("li")
-        if (ingredientName != ""){
+        if (ingredientName != "" && ingredientName != null){
             li.textContent = ingredientEntry
             recipeIngredients.append(li)
         }   
     }
-    console.log(meal.strInstructions)
 }
 
 function renderRecipeBar(meal) {
@@ -64,7 +63,8 @@ function renderRecipeBar(meal) {
 
     img.addEventListener('click', (e) => {
         // loads clicked meal into the spotlight
-        loadRecipe(meal)
+        getMealById(meal.idMeal)
+        .then(meal => loadRecipe(meal))
     })
 }
 
@@ -86,18 +86,15 @@ function clearBar(){
     recipeBanner.innerHTML = ""
 }
 
+let mealToFetch = {}
+
 function getMealById(id){
-    // let mealFetched = {}
     return fetch(`https://www.themealdb.com/api/json/v2/9973533/lookup.php?i=${id}`)
     .then(res => res.json())
-    .then(data => 
-        data.meals[0]
-        // mealFetched = data.meals[0]
-    )
-    // return mealFetched
+    .then(data => {
+        return data.meals[0]
+    })
 }
-
-console.log(getMealById(52885).PromiseResult)
 
 function handleForm() {
     const form = document.querySelector('#ingredient-form')
@@ -108,16 +105,27 @@ function handleForm() {
 
         clearBar();
 
-        fetch(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${firstIng},${secondIng}`)
+        if (secondIng == ""){
+            fetch(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${firstIng}`)
             .then(res => res.json())
             .then(data => data.meals.forEach((meal) => {
                 renderRecipeBar(meal)
-                // const mealToLoad = getMealById(52885)
-                // console.log(mealToLoad)
-                // loadRecipe(getMealById(meal.idMeal))
-                // console.log(getMealById(meal.idMeal))
+                getMealById(meal.idMeal)
+                .then(meal => loadRecipe(meal))
             } 
-        ))
+            ))
+        }
+     
+        else{
+            fetch(`https://www.themealdb.com/api/json/v2/9973533/filter.php?i=${firstIng},${secondIng}`)
+                .then(res => res.json())
+                .then(data => data.meals.forEach((meal) => {
+                    renderRecipeBar(meal)
+                    getMealById(meal.idMeal)
+                    .then(meal => loadRecipe(meal))
+                } 
+            ))
+        }
         
 
     })
