@@ -4,6 +4,8 @@ const recipeInstructions = document.getElementById("directions");
 const recipeIngredients = document.getElementById("ingredients");
 const recipeBanner = document.querySelector('#recipe-banner')
 const ingredientsHeader = document.querySelector('#ingredients-header')
+const emailForm = document.getElementById("email")
+
 const API_KEY = 9973533
 
 // load random recipe at first
@@ -29,6 +31,7 @@ function loadRandom(){
         recipeName.textContent = `Here's an idea: ${mealName}`;
         recipeInstructions.textContent = instructions;
         renderRecipeBar(recipe.meals[0])
+        emailForm.style.display = "block"
         sendEmail()
     })
 }
@@ -59,6 +62,7 @@ function loadRecipe(meal){
         }   
     }
     ingredientsHeader.textContent = "Ingredients"
+    emailForm.style.display = "block"
     sendEmail()
 
 }
@@ -165,6 +169,8 @@ function nothingFoundOne(firstIng){
     recipeInstructions.textContent = "We're not MADE of recipes over here. Look for something else in your pantry and/or fridge!"
     recipeIngredients.innerHTML = ""
     ingredientsHeader.textContent = ""
+    // hide email form
+    emailForm.style.display = "none"
 }
 
 function nothingFoundTwo(firstIng, secondIng){
@@ -173,17 +179,12 @@ function nothingFoundTwo(firstIng, secondIng){
     recipeInstructions.textContent = "We're not MADE of recipes over here. Look for something else in your pantry and/or fridge!"
     recipeIngredients.innerHTML = ""
     ingredientsHeader.textContent = ""
+    // hide email form
+    emailForm.style.display = "none"
 }
 
-
-loadRandom()
-loadBanner()
-handleForm()
-
-
 function sendEmail() {
-    const form = document.getElementById("email")
-    form.addEventListener("submit", (e) =>{
+    emailForm.addEventListener("submit", (e) =>{
         let body = encodeURIComponent(recipeIngredients.innerText)
         e.preventDefault()
         const address = e.target["address"].value;
@@ -191,3 +192,7 @@ function sendEmail() {
         window.open(`mailto:${address}?subject=${subject}&body=${body}`)
     })
 }
+
+loadRandom()
+loadBanner()
+handleForm()
