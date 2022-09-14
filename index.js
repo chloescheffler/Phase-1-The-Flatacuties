@@ -155,7 +155,7 @@ function handleForm() {
 
 function nothingFoundOne(firstIng){
     // recipeImage
-    recipeName.textContent = `No recipes found with ${e.target["first"].value}. Sorry.`
+    recipeName.textContent = `No recipes found with ${firstIng}. Sorry.`
     recipeInstructions.textContent = "We're not MADE of recipes over here. Look for something else in your pantry and/or fridge!"
     recipeIngredients.innerHTML = ""
     ingredientsHeader.textContent = ""
@@ -163,7 +163,7 @@ function nothingFoundOne(firstIng){
 
 function nothingFoundTwo(firstIng, secondIng){
     // recipeImage
-    recipeName.textContent = `No recipes found with ${e.target["first"].value} and ${e.target["second"].value}. Sorry.`
+    recipeName.textContent = `No recipes found with ${firstIng} and ${secondIng}. Sorry.`
     recipeInstructions.textContent = "We're not MADE of recipes over here. Look for something else in your pantry and/or fridge!"
     recipeIngredients.innerHTML = ""
     ingredientsHeader.textContent = ""
