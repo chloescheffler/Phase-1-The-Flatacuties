@@ -29,6 +29,7 @@ function loadRandom(){
         recipeName.textContent = `Here's an idea: ${mealName}`;
         recipeInstructions.textContent = instructions;
         renderRecipeBar(recipe.meals[0])
+        sendEmail()
     })
 }
 
@@ -58,6 +59,8 @@ function loadRecipe(meal){
         }   
     }
     ingredientsHeader.textContent = "Ingredients"
+    sendEmail()
+
 }
 
 function renderRecipeBar(meal) {
@@ -176,12 +179,10 @@ function nothingFoundTwo(firstIng, secondIng){
 loadRandom()
 loadBanner()
 handleForm()
-sendEmail()
 
 
 function sendEmail() {
-    console.log(recipeIngredients.innerText)
-    let body = (recipeIngredients.innerText)
+    let body = encodeURIComponent(recipeIngredients.innerText)
     const form = document.getElementById("email")
     form.addEventListener("submit", (e) =>{
         e.preventDefault()
