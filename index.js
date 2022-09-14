@@ -81,6 +81,9 @@ function textify(string){
             newString = newString + string[letter].toLowerCase()
         }
     }
+    if (newString == "eggplant"){
+        newString = "aubergine"
+    }
     return newString
 }
 
@@ -177,12 +180,13 @@ sendEmail()
 
 
 function sendEmail() {
-    const body = recipeIngredients
+    console.log(recipeIngredients.innerText)
+    let body = (recipeIngredients.innerText)
     const form = document.getElementById("email")
     form.addEventListener("submit", (e) =>{
         e.preventDefault()
         const address = e.target["address"].value;
-        const subject = "Here Is Your Recipe Shopping List!"
-        window.open(`mailto:${address}&subject=${subject}&body=${body}`)
+        const subject = encodeURIComponent("Here Is Your Recipe Shopping List!")
+        window.open(`mailto:${address}?subject=${subject}&body=${body}`)
     })
 }
