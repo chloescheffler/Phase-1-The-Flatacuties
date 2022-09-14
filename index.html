@@ -17,21 +17,27 @@
             <!-- Recipe Images and Names Here -->
     </div>
     <!-- Recipe Details -->
-    <div id="recipe-detail">
-        <div id="recipe-image">
-            <img id="detail-image" src="" alt="" />
+    <div id="recipe-detail" class="recipe-detail">
+        <div id="recipe-image" class="flexbox">
+            <img class="innerElement" id="detail-image" src="" alt="" />
+            <!-- Ingredients -->
+            <div class="innerElement" id="ingredient-form">
+                <form id="ingredientsform">
+                    <h4>What do you have?</h4>
+                    <input type="text" name="first" id="first" />
+                    <input type="text" name="second" id="second" />
+                    <input type="submit" value="Look up" />
+                </form>
+            </div>
         </div>
-        <div id="recipe-directions">
-            <h2 id="directions-header">Directions</h2>
-            <br>
-            <p id="directions">directions go here</p> 
+        <div id="recipe-directions" class="flexbox">
+            <h2 class="innerElement" id="directions-header">Directions</h2>
+            <p class="innerElement" id="directions">directions go here</p> 
         </div>
-        <div id="recipe-ingredients">
-            <h2 id="ingredients-header">Ingredients</h2>
-            <br>
-            <ul id="ingredients"></ul>
-            <br>
-            <form id="email">
+        <div id="recipe-ingredients" class="flexbox">
+            <h2 class="innerElement" id="ingredients-header">Ingredients</h2>
+            <ul class="innerElement" id="ingredients"></ul>
+            <form class="innerElement" id="email">
                 <input type="text" name="address" id="address" placeholder="yourname@hotmail.com">
                 <input type="submit" value="Email me a shopping list">
             </form>
@@ -39,15 +45,6 @@
 
     </div>
 
-    <!-- Ingredients -->
-    <div id="ingredient-form">
-        <form id="ingredients">
-            <h4>What do you have?</h4>
-            <input type="text" name="first" id="first" />
-            <input type="text" name="second" id="second" />
-            <input type="submit" value="Look up" />
-        </form>
-    </div>
  
 
 </body>
