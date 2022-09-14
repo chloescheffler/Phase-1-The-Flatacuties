@@ -64,7 +64,6 @@ function loadRecipe(meal){
     ingredientsHeader.textContent = "Ingredients"
     emailForm.style.display = "block"
     sendEmail()
-
 }
 
 function renderRecipeBar(meal) {
@@ -93,7 +92,6 @@ function textify(string){
     }
     return newString
 }
-
 
 function clearBar(){
     recipeBanner.innerHTML = ""
