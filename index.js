@@ -154,7 +154,7 @@ function handleForm() {
 }
 
 function nothingFoundOne(firstIng){
-    // recipeImage
+    recipeImage.src = ""
     recipeName.textContent = `No recipes found with ${firstIng}. Sorry.`
     recipeInstructions.textContent = "We're not MADE of recipes over here. Look for something else in your pantry and/or fridge!"
     recipeIngredients.innerHTML = ""
@@ -162,7 +162,7 @@ function nothingFoundOne(firstIng){
 }
 
 function nothingFoundTwo(firstIng, secondIng){
-    // recipeImage
+    recipeImage.src = ""
     recipeName.textContent = `No recipes found with ${firstIng} and ${secondIng}. Sorry.`
     recipeInstructions.textContent = "We're not MADE of recipes over here. Look for something else in your pantry and/or fridge!"
     recipeIngredients.innerHTML = ""
@@ -173,3 +173,36 @@ function nothingFoundTwo(firstIng, secondIng){
 loadRandom()
 loadBanner()
 handleForm()
+emailForm()
+
+
+function emailForm(){
+    const body = recipeIngredients
+    const form = document.getElementById("email")
+    form.addEventListener("submit", (e) =>{
+        e.preventDefault()
+        const address = e.target["address"].value;
+        console.log(address)
+        console.log(body)
+
+    })
+}
+
+
+function sendEmail() {
+    
+    // Email.send({
+    //     Host : "smtp.mailtrap.io",
+    //     Username : "<Mailtrap username>",
+    //     Password : "<Mailtrap password>",
+    //     To : address,
+    //     From : "sender@example.com",
+    //     Subject : "Test email",
+    //     Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
+    // }).then(
+    //   message => alert(message)
+    // );
+    console.log(address)
+    console.log(body)
+
+}

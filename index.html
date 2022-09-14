@@ -6,6 +6,7 @@
     <title>Recipe Idea Generator</title>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <script defer type="text/javascript" defer src="index.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 
 <body>
@@ -19,7 +20,7 @@
     <!-- Recipe Details -->
     <div id="recipe-detail">
         <div id="recipe-image">
-            <img id="detail-image" src="" alt="Insert Name Here" />
+            <img id="detail-image" src="" alt="" />
         </div>
         <div id="recipe-directions">
             <h2 id="directions-header">Directions</h2>
@@ -30,6 +31,11 @@
             <h2 id="ingredients-header">Ingredients</h2>
             <br>
             <ul id="ingredients"></ul>
+            <br>
+            <form id="email">
+                <input type="text" name="address" id="address" placeholder="nigerianprince99@hotmail.com">
+                <input type="button" value="Email myself this recipe" onclick="sendEmail()">
+            </form>
         </div>
 
     </div>
