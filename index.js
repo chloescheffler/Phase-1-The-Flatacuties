@@ -173,36 +173,16 @@ function nothingFoundTwo(firstIng, secondIng){
 loadRandom()
 loadBanner()
 handleForm()
-emailForm()
+sendEmail()
 
 
-function emailForm(){
+function sendEmail() {
     const body = recipeIngredients
     const form = document.getElementById("email")
     form.addEventListener("submit", (e) =>{
         e.preventDefault()
         const address = e.target["address"].value;
-        console.log(address)
-        console.log(body)
-
+        const subject = "Here Is Your Recipe Shopping List!"
+        window.open(`mailto:${address}&subject=${subject}&body=${body}`)
     })
-}
-
-
-function sendEmail() {
-    
-    // Email.send({
-    //     Host : "smtp.mailtrap.io",
-    //     Username : "<Mailtrap username>",
-    //     Password : "<Mailtrap password>",
-    //     To : address,
-    //     From : "sender@example.com",
-    //     Subject : "Test email",
-    //     Body : "<html><h2>Header</h2><strong>Bold text</strong><br></br><em>Italic</em></html>"
-    // }).then(
-    //   message => alert(message)
-    // );
-    console.log(address)
-    console.log(body)
-
 }
