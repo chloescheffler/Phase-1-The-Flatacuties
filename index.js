@@ -182,9 +182,9 @@ handleForm()
 
 
 function sendEmail() {
-    let body = encodeURIComponent(recipeIngredients.innerText)
     const form = document.getElementById("email")
     form.addEventListener("submit", (e) =>{
+        let body = encodeURIComponent(recipeIngredients.innerText)
         e.preventDefault()
         const address = e.target["address"].value;
         const subject = encodeURIComponent("Here Is Your Recipe Shopping List!")
